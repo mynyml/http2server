@@ -1,7 +1,7 @@
 using System;                 // Console
 using System.Net;             // IPAddress, IPEndPoint
 using System.Net.Sockets;     // TcpListener, Socket, NetworkStream
-using System.Text;            // Encoding
+using System.Text;            // Encoding, StringBuilder
 using System.Threading.Tasks; // Task
 
 namespace HTTP2
@@ -26,6 +26,7 @@ namespace HTTP2
 
           var stream = new NetworkStream(socket);
           var recvBuffer = new byte[4096];
+          var response = new StringBuilder();
 
           while (true)
           {
@@ -38,7 +39,12 @@ namespace HTTP2
               break;
             }
 
-            await stream.WriteAsync(recvBuffer, 0, recvBuffer.Length);
+            response.AppendLine("HTTP/1.1 101 Switching Protocols");
+            response.AppendLine("Connection: Upgrade");
+            response.AppendLine("Upgrade: h2c");
+            response.AppendLine();
+
+            await stream.WriteAsync(Encoding.UTF8.GetBytes(response.ToString()), 0, response.Length);
             await stream.FlushAsync();
           }
         }
