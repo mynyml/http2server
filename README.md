@@ -26,3 +26,12 @@
       * Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
       * http2 error: Remote peer returned unexpected data while we expected SETTINGS frame.  Perhaps, peer does not support HTTP/2 properly.
       * Closing connection 0
+
+### References
+
+* [RFC7540](http://httpwg.org/specs/rfc7540.html)
+* [RFC7541](http://httpwg.org/specs/rfc7541.html)
+* [High Performance Browser Networking](https://hpbn.co/)
+* [Tools](https://github.com/http2/http2-spec/wiki/Tools)
+* [Specs](https://github.com/summerwind/h2spec)
+
